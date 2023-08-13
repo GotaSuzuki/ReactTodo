@@ -2,8 +2,10 @@ import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { useRecoilValue } from 'recoil';
 import { completeState } from '../store/completeState';
+import useOnClick from '../hooks/onClick';
 
-const Complete = ({ onClickBack }) => {
+const Complete = () => {
+  const { onClickBack } = useOnClick();
   const completeTodos = useRecoilValue(completeState);
   return (
     <div className="complete-area">

@@ -2,8 +2,10 @@ import React from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { incompleteState } from '../store/incompleteState';
 import { useRecoilValue } from 'recoil';
+import useOnClick from '../hooks/onClick';
 
-const IncompleteTodo = ({ onClickDelete, onClickComplete }) => {
+const IncompleteTodo = () => {
+  const { onClickDelete, onClickComplete } = useOnClick();
   const incompleteTodos = useRecoilValue(incompleteState);
   return (
     <div className="incomplete-area">
