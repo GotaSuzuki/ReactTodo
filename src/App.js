@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Complete from './components/Complete';
+import IncompleteTodo from './components/IncompleteTodo';
+import InputTodo from './components/InputTodo';
+import { useRecoilState } from 'recoil';
+import { todoTextState } from './store/todoTextState';
+import useOnClick from './hooks/onClick';
 
 function App() {
+  const { onClickAdd, onClickDelete, onClickComplete, onClickBack } = useOnClick();
+  const [todoText, setTodoText] = useRecoilState(todoTextState);
+
+  const getTodoText = (e) => setTodoText(e.target.value);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <InputTodo todoText={todoText} getTodoText={getTodoText} onClickAdd={onClickAdd} />
+      <IncompleteTodo onClickDelete={onClickDelete} onClickComplete={onClickComplete} />
+      <Complete onClickBack={onClickBack} />
+    </div >
   );
 }
 
